@@ -1,30 +1,19 @@
 class Library:
-    number_of_books = 0
-    bookList = []
+    def __init__(self, collection=None):
+        self._bookCollection = []
 
-    def __init__(self, title):
-        self.title = title
-        Library.bookList.append(title)
-        Library.number_of_books += 1
+        if collection:
+            for title in collection:
+                self.add_book(title)
 
+    def add_book(self, title):
+        self._bookCollection.remove(title)
+
+    def borrow_book(self, title):
+        if title not in self._bookCollection :
+            self._bookCollection.append(title)
     @property
-    def book(self, title):
-        for b in Library.bookList:
-            if b != title:
-                Library.bookList.pop(title)
+    def numberOfBooks(self):
+        print(len(self._bookCollection))
+        return len(self._bookCollection)
 
-    @book.setter
-    def book(self, title):
-        if title == self.title:
-            #raise ValueError("Ta książka jest już w bazie")
-            print("Ta książka już jest")
-
-
-    def show_books(self):
-        print(Library.bookList)
-
-
-book1 = Library("Bolek i Lolek")
-book2 = Library("Python")
-book3 = Library("Python")
-print (Library.bookList)
